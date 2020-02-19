@@ -1,5 +1,14 @@
 Leg Tracker
 ===========
+Forked from https://github.com/angusleigh/leg_tracker. 
+
+Changes:
+- Use people_msgs/Person messages instead of leg_tracker/Person to include both position and velocity on the same messasge.
+
+
+-----------------------------------------------------------------------------------------------------------------------
+**Original repo** 
+
 ![ROS](https://img.shields.io/badge/ROS-Melodic-brightgreen.svg)  ![OS](https://img.shields.io/badge/OS-Ubuntu%2018.04-orange.svg ) ![OpenCV](https://img.shields.io/badge/OpenCV-3.4-blue.svg)
 
 
