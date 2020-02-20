@@ -3,12 +3,13 @@
 import rospy
 
 # Custom messages
-from leg_tracker.msg import Person, PersonArray, Leg, LegArray 
+from leg_tracker.msg import Leg, LegArray 
 
 # ROS messages
 from visualization_msgs.msg import Marker
 from sensor_msgs.msg import LaserScan
 from nav_msgs.msg import OccupancyGrid
+from people_msgs.msg import People, Person
 
 # Standard python modules
 import numpy as np
@@ -26,6 +27,7 @@ import sys
 
 # External modules
 from pykalman import KalmanFilter # To install: http://pykalman.github.io/#installation
+from scipy._lib.six import xrange
 
 
 class DetectedCluster:
@@ -79,7 +81,7 @@ class ObjectTracked:
         elif scan_frequency > 14.99 and scan_frequency < 15.01:
             std_process_noise = 0.03333
         else:
-            print "Scan frequency needs to be either 7.5, 10 or 15 or the standard deviation of the process noise needs to be tuned to your scanner frequency"
+            print("Scan frequency needs to be either 7.5, 10 or 15 or the standard deviation of the process noise needs to be tuned to your scanner frequency")
         std_pos = std_process_noise
         std_vel = std_process_noise
         std_obs = 0.1
@@ -191,8 +193,8 @@ class KalmanMultiTracker:
         self.latest_scan_header_stamp_with_tf_available = rospy.get_rostime()
 
     	# ROS publishers
-        self.people_tracked_pub = rospy.Publisher('people_tracked', PersonArray, queue_size=300)
-        self.people_detected_pub = rospy.Publisher('people_detected', PersonArray, queue_size=300)
+        self.people_tracked_pub = rospy.Publisher('people_tracked', People, queue_size=300)
+        self.people_detected_pub = rospy.Publisher('people_detected', People, queue_size=300)
         self.marker_pub = rospy.Publisher('visualization_marker', Marker, queue_size=300)
         self.non_leg_clusters_pub = rospy.Publisher('non_leg_clusters', LegArray, queue_size=300)
 
@@ -229,7 +231,7 @@ class KalmanMultiTracker:
         # Take the average of the local map's values centred at (map_x, map_y), with a kernal size of <kernel_size>
         # If called repeatedly on the same local_map, this could be sped up with a sum-table
         sum = 0
-        kernel_size = 2;
+        kernel_size = 2
         for i in xrange(map_x-kernel_size, map_x+kernel_size):
             for j in xrange(map_y-kernel_size, map_y+kernel_size):
                 if i + j*self.local_map.info.height < len(self.local_map.data):
@@ -605,7 +607,7 @@ class KalmanMultiTracker:
         """
         Publish markers of tracked people to Rviz and to <people_tracked> topic
         """        
-        people_tracked_msg = PersonArray()
+        people_tracked_msg = People()
         people_tracked_msg.header.stamp = now
         people_tracked_msg.header.frame_id = self.publish_people_frame        
         marker_id = 0
@@ -643,15 +645,18 @@ class KalmanMultiTracker:
                         
                         # publish to people_tracked topic
                         new_person = Person() 
-                        new_person.pose.position.x = ps.point.x 
-                        new_person.pose.position.y = ps.point.y 
-                        yaw = math.atan2(person.vel_y, person.vel_x)
-                        quaternion = tf.transformations.quaternion_from_euler(0, 0, yaw)
-                        new_person.pose.orientation.x = quaternion[0]
-                        new_person.pose.orientation.y = quaternion[1]
-                        new_person.pose.orientation.z = quaternion[2]
-                        new_person.pose.orientation.w = quaternion[3] 
-                        new_person.id = person.id_num 
+                        new_person.position.x = ps.point.x 
+                        new_person.position.y = ps.point.y
+                        new_person.velocity.x = round(person.vel_x,2)
+                        new_person.velocity.y = round(person.vel_y,2) 
+                        new_person.reliability = person.confidence
+                        #yaw = math.atan2(person.vel_y, person.vel_x)
+                        #quaternion = tf.transformations.quaternion_from_euler(0, 0, yaw)
+                        #new_person.pose.orientation.x = quaternion[0]
+                        #new_person.pose.orientation.y = quaternion[1]
+                        #new_person.pose.orientation.z = quaternion[2]
+                        #new_person.pose.orientation.w = quaternion[3] 
+                        new_person.name = str(person.id_num) 
                         people_tracked_msg.people.append(new_person)
 
                         # publish rviz markers       
