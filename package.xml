@@ -3,7 +3,7 @@
   <name>leg_tracker</name>
   <version>0.0.0</version>
   <description>The leg_detector package</description>
-  <maintainer email="angus@todo.todo">angus</maintainer>
+  <maintainer email="tberriel@itainnova.es">angus</maintainer>
   <license>TODO</license>
 
 
@@ -16,6 +16,7 @@
   <build_depend>image_geometry</build_depend>
   <build_depend>message_generation</build_depend>
   <build_depend>libfftw3</build_depend>
+  <build_depend>people_msg</build_depend>
   
   <run_depend>roscpp</run_depend>
   <run_depend>rospy</run_depend>
@@ -25,6 +26,7 @@
   <run_depend>image_geometry</run_depend>
   <run_depend>message_runtime</run_depend>  
   <run_depend>libfftw3</run_depend>
+  <run_depend>people_msg</run_depend>
 
 
 </package>

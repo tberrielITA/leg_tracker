@@ -19,12 +19,13 @@ find_package(catkin REQUIRED COMPONENTS
   rosbag
   image_geometry
   message_generation
+  people_msgs
 )
 
 add_message_files(
   FILES
-  Person.msg
-  PersonArray.msg
+  #Person.msg
+  #PersonArray.msg
   Leg.msg
   LegArray.msg
 )
@@ -33,6 +34,7 @@ generate_messages(
   DEPENDENCIES  
   std_msgs  
   geometry_msgs
+  people_msgs
 )  
 
 

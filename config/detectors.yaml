@@ -1,0 +1,6 @@
+to_pose_array:
+    detectors:                                  # Add detectors under this namespace
+        leg_detector:                           # Name of detector (used internally to identify them. Has to be unique.
+            topic: "/people_tracked"  # The topic on which the geometry_msgs/PoseArray is published
+            point_name: "position"                   # The name of the point containing the coordinates in question
+            velocity_name: "velocity"
