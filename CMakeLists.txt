@@ -30,12 +30,12 @@ add_message_files(
   LegArray.msg
 )
 
-generate_messages(   
-  DEPENDENCIES  
-  std_msgs  
+generate_messages(
+  DEPENDENCIES
+  std_msgs
   geometry_msgs
   people_msgs
-)  
+)
 
 
 catkin_package(
@@ -51,7 +51,7 @@ include_directories(
 
 
 add_executable(
-  detect_leg_clusters 
+  detect_leg_clusters
   src/detect_leg_clusters.cpp
   src/laser_processor.cpp
   src/cluster_features.cpp
@@ -68,7 +68,7 @@ add_executable(
   src/laser_processor.cpp
 )
 target_link_libraries(
-  local_occupancy_grid_mapping 
+  local_occupancy_grid_mapping
   ${catkin_LIBRARIES}
 )
 
@@ -88,7 +88,7 @@ add_executable(
   train_leg_detector
   src/train_leg_detector.cpp
   src/laser_processor.cpp
-  src/cluster_features.cpp  
+  src/cluster_features.cpp
 )
 target_link_libraries(
   train_leg_detector
@@ -119,9 +119,3 @@ install(
   PROGRAMS scripts/individual_leg_tracker.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
-
-
-
-
-
-
