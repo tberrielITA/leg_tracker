@@ -50,7 +50,7 @@ def callback(data):
 if __name__ == '__main__':
 
     rospy.init_node('people_to_obstacle')
-    obstacle_publisher = rospy.Publisher("~/robot_0/move_base/TebLocalPlannerROS/obstacles", ObstacleArrayMsg, queue_size=0)
-    rospy.Subscriber("people_tracked", People, callback)
+    obstacle_publisher = rospy.Publisher("~/move_base/TebLocalPlannerROS/obstacles", ObstacleArrayMsg, queue_size=0)
+    rospy.Subscriber("people", People, callback)
     rospy.spin()
     
