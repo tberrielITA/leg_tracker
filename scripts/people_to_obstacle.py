@@ -22,7 +22,7 @@ def callback(data):
         obstacle_msg = ObstacleMsg()
         
         obstacle_msg.id = int(person.name)
-        obstacle_msg.radius = 0
+        obstacle_msg.radius = 0.5
         obstacle_msg.polygon.points = [Point32()]
         obstacle_msg.polygon.points[0].x = person.position.x
         obstacle_msg.polygon.points[0].y = person.position.y
@@ -51,6 +51,6 @@ if __name__ == '__main__':
 
     rospy.init_node('people_to_obstacle')
     obstacle_publisher = rospy.Publisher("~/robot_0/move_base/TebLocalPlannerROS/obstacles", ObstacleArrayMsg, queue_size=0)
-    rospy.Subscriber("people_tracked", People, callback)
+    rospy.Subscriber("people", People, callback)
     rospy.spin()
     
