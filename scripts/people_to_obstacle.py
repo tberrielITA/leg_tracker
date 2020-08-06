@@ -22,7 +22,7 @@ def callback(data):
         obstacle_msg = ObstacleMsg()
         
         obstacle_msg.id = int(person.name)
-        obstacle_msg.radius = 0.5
+        obstacle_msg.radius = 0.25
         obstacle_msg.polygon.points = [Point32()]
         obstacle_msg.polygon.points[0].x = person.position.x
         obstacle_msg.polygon.points[0].y = person.position.y

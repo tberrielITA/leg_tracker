@@ -6,10 +6,10 @@
   <param name="fixed_frame" value="/map"/-->
   <param name="scan_topic" value="/scan/shadow" />
   <param name="fixed_frame" value="base_link"/>
-  <param name="scan_frequency" value="10"/>
+  <param name="scan_frequency" value="15"/>
   <!--Adjusted params-->
   <!--param name="max_detected_clusters" value="-1"/-->
-  <param name="detection_threshold" value="0.4"/>  <!--Por defecto 0-->
+  <param name="detection_threshold" value="0.5"/>  <!--Por defecto 0-->
   <param name="min_points_per_cluster" value="5"/> <!--Por defecto 3-->
   <param name="max_detect_distance" value="5.0"/> <!--No detecta a más de 4 - 5 metros -->
   <param name="publish_occluded" value="True"/> <!--Por defecto True-->
