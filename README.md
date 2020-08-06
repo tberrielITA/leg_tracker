@@ -4,6 +4,7 @@ Forked from https://github.com/angusleigh/leg_tracker.
 
 Changes:
 - Use people_msgs/Person messages instead of leg_tracker/Person to include both position and velocity on the same messasge.
+- People_to_obstacle.py converts people_msg to obstacle_msg for teb_planner dynamic obstacle integration.
 
 
 -----------------------------------------------------------------------------------------------------------------------
